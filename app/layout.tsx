@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +25,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-slate-950`}>
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>
+                <NavigationMenuLink>Link</NavigationMenuLink>
+              </NavigationMenuTrigger>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        <main className="mx-40 bg-slate-300">{children}</main>
+      </body>
     </html>
   );
 }
