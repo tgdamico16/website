@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,16 +26,59 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-slate-950`}>
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>
-                <NavigationMenuLink>Link</NavigationMenuLink>
-              </NavigationMenuTrigger>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-        <main className="mx-40 bg-slate-300">{children}</main>
+        <div className="inline-block w-full px-8 py-4">
+          <span className="float-left">
+            <NavigationMenu className="text-white">
+              <NavigationMenuList>
+                <NavigationMenuItem className="pr-2">
+                  <Avatar>
+                    <AvatarImage src="/avatarZoomed2.jpg" alt="@shadcn" />
+                  </Avatar>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/" legacyBehavior passHref>
+                    <NavigationMenuLink className="font-bold text-xl">
+                      TGD
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </span>
+          <span className="float-right">
+            <NavigationMenu className="text-white">
+              <NavigationMenuList>
+                <NavigationMenuItem className="pr-4">
+                  <Link href="/" legacyBehavior passHref>
+                    <NavigationMenuLink>Page 1</NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem className="px-2">
+                  <Link href="/" legacyBehavior passHref>
+                    <NavigationMenuLink>Page 2</NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <span className="float-right">
+                  <NavigationMenuItem className="pl-4">
+                    <Link href="/" legacyBehavior passHref>
+                      <NavigationMenuLink>Page 3</NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                </span>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </span>
+        </div>
+        <Card className="mx-32 bg-slate-300">
+          <CardContent className="pt-6 min-h-[86vh]">
+            <main>{children}</main>
+          </CardContent>
+        </Card>
+        <div className="w-full py-4">
+          <p className="text-white text-center text-sm">
+            Developed by Troy D&apos;Amico
+          </p>
+        </div>
       </body>
     </html>
   );

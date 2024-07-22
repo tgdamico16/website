@@ -6,7 +6,7 @@ export default function Home() {
       <Avatar className="size-28">
         <AvatarImage src="/avatar.jpg" alt="@shadcn" />
       </Avatar>
-      <h1>Welcome to Troy's Website!</h1>
+      <h1>Welcome to Troy&apos;s Website!</h1>
     </>
   );
 }
