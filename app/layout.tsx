@@ -30,15 +30,15 @@ export default function RootLayout({
           <span className="float-left">
             <NavigationMenu className="text-white">
               <NavigationMenuList>
-                <NavigationMenuItem className="pr-2">
-                  <Avatar>
-                    <AvatarImage src="/avatarZoomed2.jpg" alt="@shadcn" />
-                  </Avatar>
-                </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link href="/" legacyBehavior passHref>
-                    <NavigationMenuLink className="font-bold text-xl">
-                      TGD
+                    <NavigationMenuLink>
+                      <div className="flex items-center">
+                        <Avatar>
+                          <AvatarImage src="/avatarZoomed2.jpg" alt="@shadcn" />
+                        </Avatar>
+                        <p className="font-bold text-xl ml-2">TGD</p>
+                      </div>
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -49,8 +49,8 @@ export default function RootLayout({
             <NavigationMenu className="text-white">
               <NavigationMenuList>
                 <NavigationMenuItem className="pr-4">
-                  <Link href="/" legacyBehavior passHref>
-                    <NavigationMenuLink>Page 1</NavigationMenuLink>
+                  <Link href="/games" legacyBehavior passHref>
+                    <NavigationMenuLink>Games</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem className="px-2">
@@ -70,7 +70,7 @@ export default function RootLayout({
           </span>
         </div>
         <Card className="mx-32 bg-slate-300">
-          <CardContent className="pt-6 min-h-[86vh]">
+          <CardContent className="pt-6 min-h-[80vh]">
             <main>{children}</main>
           </CardContent>
         </Card>
