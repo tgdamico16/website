@@ -24,11 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-slate-950`}>
+    <html lang="en" className="dark">
+      <body className={`${inter.className} bg-neutral-950`}>
         <div className="inline-block w-full px-8 py-4">
           <span className="float-left">
-            <NavigationMenu className="text-white">
+            <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link href="/" legacyBehavior passHref>
@@ -46,7 +46,7 @@ export default function RootLayout({
             </NavigationMenu>
           </span>
           <span className="float-right">
-            <NavigationMenu className="text-white">
+            <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem className="pr-4">
                   <Link href="/games" legacyBehavior passHref>
@@ -69,7 +69,7 @@ export default function RootLayout({
             </NavigationMenu>
           </span>
         </div>
-        <Card className="mx-32 bg-slate-300">
+        <Card className="mx-8">
           <CardContent className="pt-6 min-h-[80vh]">
             <main>{children}</main>
           </CardContent>

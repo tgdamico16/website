@@ -7,12 +7,12 @@ export default function Games() {
       <h1 className="text-center font-bold text-xl">Games</h1>
       <div className="grid grid-cols-2 gap-4 pt-4">
         <Link href="/games/spelling-bee">
-          <Card className="bg-slate-300">
+          <Card>
             <CardHeader>Spelling Bee</CardHeader>
             <CardContent className="pt-6">Spelling Game</CardContent>
           </Card>
         </Link>
-        <Card className="bg-slate-300">
+        <Card>
           <CardHeader>title</CardHeader>
           <CardContent className="pt-6">temp</CardContent>
         </Card>
