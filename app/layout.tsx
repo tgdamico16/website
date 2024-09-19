@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-neutral-950`}>
-        <div className="inline-block w-full px-8 py-4 text-foreground">
+        <div className="px-8 py-4 text-foreground flex justify-between items-center">
           <span className="float-left">
             <NavigationMenu>
               <NavigationMenuList>
