@@ -23,13 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body className={`${inter.className} bg-neutral-950`}>
         <Navbar />
-        <Card className="mx-8">
-          <CardContent className="pt-6 min-h-[80vh]">
-            <main>{children}</main>
-          </CardContent>
-        </Card>
+        <div className="min-h-[80vh] flex">{children}</div>
         <Footer />
         <TSParticles />
       </body>
