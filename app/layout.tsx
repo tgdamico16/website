@@ -9,7 +9,7 @@ import { TSParticles } from "@/components/particles";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Troy's Site - Home",
+  title: "Troy's Site",
   description: "A website all about Troy",
   icons: {
     icon: "/favicon.ico",
