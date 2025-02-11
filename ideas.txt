@@ -3,3 +3,4 @@
 3. Chatbot (talk to Troy)
 4. videogame blog
 5. trivia game
+6. encrypted message to Troy
