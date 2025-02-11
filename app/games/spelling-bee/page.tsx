@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SpeakerLoudIcon } from "@radix-ui/react-icons";
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useCallback, useEffect, useState } from "react";
 import { words } from "../../../components/spelling-bee/tempWords";
 
 type Difficulty = "Easy" | "Medium" | "Hard";
@@ -30,7 +30,7 @@ export default function SpellingBee() {
     window.speechSynthesis.speak(utterance);
   }
 
-  function handleKeyPress(e: KeyboardEvent<HTMLInputElement>): void {
+  function handleKeyPressInputBox(e: KeyboardEvent<HTMLInputElement>): void {
     if (e.key === "Enter") {
       handleOnSubmit();
     }
@@ -69,45 +69,74 @@ export default function SpellingBee() {
       },
     ]);
   }
+
+  const handleKeyPressPage = useCallback(
+    (event: globalThis.KeyboardEvent) => {
+      // Check if it's the spacebar and not a repeated event
+      if (event.code === "Space" && !event.repeat) {
+        event.preventDefault(); // Prevent page scrolling
+        speakWord();
+      }
+    },
+    [speakWord]
+  );
+
+  // Set up the event listener
+  useEffect(() => {
+    // Add the event listener
+    window.addEventListener("keydown", handleKeyPressPage);
+
+    // Cleanup function to remove the listener
+    return () => {
+      window.removeEventListener("keydown", handleKeyPressPage);
+    };
+  }, [handleKeyPressPage]);
+
   return (
-    <>
-      <h1 className="text-center text-xl font-bold">Spelling Bee</h1>
-      <div>Level: {difficulty}</div>
+    <div className="grid grid-cols-3">
+      <h1 className="pl-1 text-2xl font-bold">Spelling Bee</h1>
       <div>
-        <Button onClick={speakWord}>
-          <SpeakerLoudIcon />
-        </Button>
-        <div className="flex w-full max-w-sm items-center space-x-2">
+        <div className="flex flex-col items-center pt-3 gap-3">
+          <div className="text-sm">Level: {difficulty}</div>
           <Input
             type="text"
             onChange={(e) => setInputWord(e.target.value)}
-            onKeyUp={handleKeyPress}
-            placeholder="Enter Spelling"
+            onKeyUp={handleKeyPressInputBox}
+            placeholder="Enter Guess"
             spellCheck="false"
+            className="w-80"
           />
-          <Button type="submit" onClick={handleOnSubmit}>
-            Submit
-          </Button>
+          <div className="flex gap-3">
+            <Button onClick={speakWord} variant="outline">
+              <div className="flex gap-2 items-center">
+                <SpeakerLoudIcon />
+                Speak Word ( &#9251; )
+              </div>
+            </Button>
+            <Button type="submit" onClick={handleOnSubmit}>
+              Submit ( &#8629; )
+            </Button>
+          </div>
+        </div>
+        <div className="max-h-[55vh] overflow-y-auto text-center py-4">
+          {[...guessHistory].reverse().map((guess) => (
+            <>
+              {guess.correct ? (
+                <div className="py-1">
+                  <h1 className="font-bold text-green-400">Correct!</h1>
+                  <p>{guess.guess}</p>
+                </div>
+              ) : (
+                <div className="py-1">
+                  <h1 className="font-bold text-red-400">Incorrect</h1>
+                  <p>Guess: {guess.guess}</p>
+                  <p>Word: {guess.word}</p>{" "}
+                </div>
+              )}
+            </>
+          ))}
         </div>
       </div>
-      <div className="max-h-[55vh] overflow-y-auto">
-        {[...guessHistory].reverse().map((guess) => (
-          <>
-            {guess.correct ? (
-              <div className="py-1">
-                <h1 className="font-bold">Correct!</h1>
-                <p>{guess.guess}</p>
-              </div>
-            ) : (
-              <div className="py-1">
-                <h1>{guess.correct ? "Correct!" : "Incorrect"}</h1>
-                <p>Guess: {guess.guess}</p>
-                <p>Word: {guess.word}</p>{" "}
-              </div>
-            )}
-          </>
-        ))}
-      </div>
-    </>
+    </div>
   );
 }

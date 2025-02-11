@@ -17,10 +17,16 @@ export default function Games() {
             <CardContent className="pt-6 text-center">Spelling Bee</CardContent>
           </Card>
         </Link>
-        <Card>
-          <CardHeader>title</CardHeader>
-          <CardContent className="pt-6">temp</CardContent>
-        </Card>
+        <Link href="/games/blackjack">
+          <Card>
+            <CardHeader>
+              <div className="flex w-full justify-center">
+                <Icons.spade className="size-32" />
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 text-center">Blackjack</CardContent>
+          </Card>
+        </Link>
       </div>
     </>
   );
